@@ -21,7 +21,6 @@
                         <div class="row align-items-center">
                             <div class="col-md-12">
                                 <div class="page-header-title">
-                        
                                     <h5 class="m-b-10">
                                         <i class="fab fa-circle f-24"></i>
                                         Submita sua redação</h5>
@@ -29,7 +28,7 @@
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="/"><i class="feather icon-home"></i></a></li>
                                     <li class="breadcrumb-item"><a href="#!">Tema</a></li>
-                                    <li class="breadcrumb-item"><a href="#!">Mortes no estado de SP</a></li>
+                                    <li class="breadcrumb-item"><a href="#!">{{tema.titulo}}</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -43,56 +42,53 @@
                             <div class="row">
                                 <div class="col">
                                     <div class="mb-3">
-                                        <input type="text" class="form-control form-control-lg" id="floatingInput" placeholder="Título da sua redação">
-                                        <textarea class="form-control" id="exampleTextarea" rows="20"></textarea>
-                                        <b><p>Quantidade de palavras:</p></b><div class="count_palavras">{}</div>
+                                        <input type="text" class="form-control form-control-lg" id="floatingInput" placeholder="Título da sua redação" disabled>
+                                        <textarea class="form-control" id="exampleTextarea" rows="20" disabled></textarea>
                                     </div>
                                 </div>
                                 <div class="col">
+                                    <h1>Conceito geral - <font color="red">x</font>/1000</h1>
+                                    <br>
                                     <div class="col-sm-12">
-                                        <ul class="nav nav-tabs" id="myTab1" role="tablist">
-                                            <li class="nav-item">
-                                                <a class="nav-link active" id="user-tab" data-bs-toggle="tab" href="#contacts"
-                                                    role="tab">Texto base</a>
-                                            </li>
-                                        </ul>
-        
-                                        <div class="tab-content" id="myTabContent1">
-                                            <div class="tab-pane dt-responsive table-responsive active" id="contacts"
-                                                role="tabpanel">
-                                                <div>
-                                                    <h5>Texto base do tema escolhido</h5>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="nav flex-column nav-tabs" id="vTabs" role="tablist" aria-orientation="vertical">
+                                                    <a class="nav-link active" id="crit1-tab" data-bs-toggle="tab" href="#crit1" role="tab" aria-controls="crit1" aria-selected="true">Criterio 1 - <font color="red">x</font>/200</a>
+                                                    <a class="nav-link" id="crit2-tab" data-bs-toggle="tab" href="#crit2" role="tab" aria-controls="crit2" aria-selected="false">Criterio 2 - <font color="red">x</font>/200</a>
+                                                    <a class="nav-link" id="crit3-tab" data-bs-toggle="tab" href="#crit3" role="tab" aria-controls="crit3" aria-selected="false">Criterio 3 - <font color="red">x</font>/200</a>
+                                                    <a class="nav-link" id="crit4-tab" data-bs-toggle="tab" href="#crit4" role="tab" aria-controls="crit4" aria-selected="false">Criterio 4 - <font color="red">x</font>/200</a>
+                                                    <a class="nav-link" id="crit5-tab" data-bs-toggle="tab" href="#crit5" role="tab" aria-controls="crit5" aria-selected="false">Criterio 5 - <font color="red">x</font>/200</a>
                                                 </div>
-                                                <p>
-                                                    No dia 15 do mês de janeiro passado, o presidente Jair Bolsonaro assinou o decreto que facilita a posse de armas no Brasil, em meio a críticas a governos anteriores. A medida foi publicada em edição extra do “Diário Oficial da União” e teve efeito imediato. Já está em vigor. Facilitar o acesso às armas de fogo foi uma das bandeiras de campanha de Bolsonaro, quando candidato, em nome do direito à legítima defesa. No entanto, a posse de armas é uma questão muito polêmica. Com a ajuda dos argumentos apresentados na coletânea e com suas próprias ideias sobre o assunto, redija uma dissertação argumentativa, posicionando-se em relação ao decreto presidencial: você acha que ele aumentará 
-                                                </p>
+                                            </div>
+                                            <div class="col-md-9">
+                                                <div class="tab-content" id="vTabsContent">
+                                                    <div class="tab-pane fade show active" id="crit1" role="tabpanel" aria-labelledby="crit1-tab">
+                                                        <p>Comentario</p>
+                                                    </div>
+                                            
+                                                    <div class="tab-pane fade" id="crit2" role="tabpanel" aria-labelledby="crit2-tab">
+                                                        <p>Comentario</p>
+                                                    </div>
+                                            
+                                                    <div class="tab-pane fade" id="crit3" role="tabpanel" aria-labelledby="crit3-tab">
+                                                        <p>Comentario</p>
+                                                    </div>
+                                            
+                                                    <div class="tab-pane fade" id="crit4" role="tabpanel" aria-labelledby="crit4-tab">
+                                                        <p>Comentario</p>
+                                                    </div>
+                                            
+                                                    <div class="tab-pane fade" id="crit5" role="tabpanel" aria-labelledby="crit5-tab">
+                                                        <p>Comentario</p>
+                                                    </div>
+                                            
+                                                </div>
                                             </div>
                                         </div>
                                         <!-- [ Main Content ] end -->
                                     </div>
                                 </div>
                             </div>
-                            <button class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#confirmationModal">Submeter redação</button>
-
-                            <!-- Modal confirmação usuário -->
-                            <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Confirmação de submissão</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            Tem certeza que deseja submeter a redação redigida para análise? outra tentativa só estara disponivel após X minutos
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                            <button type="button" class="btn btn-primary">Enviar</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
                         </div>
                     </div>
                 </div>
@@ -156,7 +152,7 @@
                 "lengthChange": false,
                 language: {
                     search: "Search hashtags:",
-    info: "Page _PAGE_ of _PAGES_"
+    info: "Pagina _PAGE_ de _PAGES_"
   }
 
             });

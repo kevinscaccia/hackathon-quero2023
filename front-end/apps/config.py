@@ -1,13 +1,3 @@
-"""
-App Config
-
-Created Dec 22, 2022
-
-Copyright (c) 2023 - JaneTech Inc.
-MIT License
-
-"""
-
 import os, random, string
 
 class Config(object):

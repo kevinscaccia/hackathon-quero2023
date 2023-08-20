@@ -2,7 +2,7 @@ from pydantic import BaseModel
 from typing import List
 
 class SubmitModelExtractorRequest(BaseModel):
-    id_analise:int
+    id_analise:str
     nota_final:int
     nota_criterios: List["SubmitModelExtractorRequest.NotaCriteriosItem"]
     class NotaCriteriosItem(BaseModel):

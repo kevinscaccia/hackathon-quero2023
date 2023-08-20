@@ -21,15 +21,13 @@
                         <div class="row align-items-center">
                             <div class="col-md-12">
                                 <div class="page-header-title">
-                        
                                     <h5 class="m-b-10">
                                         <i class="fab fa-circle f-24"></i>
                                         Submita sua redação</h5>
                                 </div>
                                 <ul class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="/"><i class="feather icon-home"></i></a></li>
-                                    <li class="breadcrumb-item"><a href="#!">Tema</a></li>
-                                    <li class="breadcrumb-item"><a href="#!">Mortes no estado de SP</a></li>
+                                    <li class="breadcrumb-item"><a href="#!">Temas</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -39,67 +37,39 @@
                 <div class="main-body">
                     <div class="page-wrapper">
                         <!-- [ Main Content ] start -->
-                        <div class="row">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="mb-3">
-                                        <input type="text" class="form-control form-control-lg" id="floatingInput" placeholder="Título da sua redação">
-                                        <textarea class="form-control" id="exampleTextarea" rows="20"></textarea>
-                                        <b><p>Quantidade de palavras:</p></b><div class="count_palavras">{}</div>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="col-sm-12">
-                                        <ul class="nav nav-tabs" id="myTab1" role="tablist">
-                                            <li class="nav-item">
-                                                <a class="nav-link active" id="user-tab" data-bs-toggle="tab" href="#contacts"
-                                                    role="tab">Texto base</a>
-                                            </li>
-                                        </ul>
-        
-                                        <div class="tab-content" id="myTabContent1">
-                                            <div class="tab-pane dt-responsive table-responsive active" id="contacts"
-                                                role="tabpanel">
-                                                <div>
-                                                    <h5>Texto base do tema escolhido</h5>
-                                                </div>
-                                                <p>
-                                                    No dia 15 do mês de janeiro passado, o presidente Jair Bolsonaro assinou o decreto que facilita a posse de armas no Brasil, em meio a críticas a governos anteriores. A medida foi publicada em edição extra do “Diário Oficial da União” e teve efeito imediato. Já está em vigor. Facilitar o acesso às armas de fogo foi uma das bandeiras de campanha de Bolsonaro, quando candidato, em nome do direito à legítima defesa. No entanto, a posse de armas é uma questão muito polêmica. Com a ajuda dos argumentos apresentados na coletânea e com suas próprias ideias sobre o assunto, redija uma dissertação argumentativa, posicionando-se em relação ao decreto presidencial: você acha que ele aumentará 
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <!-- [ Main Content ] end -->
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#confirmationModal">Submeter redação</button>
-
-                            <!-- Modal confirmação usuário -->
-                            <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Confirmação de submissão</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            Tem certeza que deseja submeter a redação redigida para análise? outra tentativa só estara disponivel após X minutos
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                            <button type="button" class="btn btn-primary">Enviar</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
+                        <table id="simpletable" class="simpletable table nowrap">     
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Titulo</th>
+                                    <th>Data inclusão</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for obj in objects.temas %}
+                                <tr class="unread", onclick="window.location.href='{{request.url_root}}/submit/{{obj.id}}'">
+                                    <td>
+                                        <h6 class="mb-1">{{obj.id}}
+                                        </h6>
+                                    </td>
+                                    <td>
+                                        <h6 class="mb-1">
+                                            {{obj.titulo}}</h6>
+                                    </td>
+                                    <td>
+                                        <h6 class="mb-1">
+                                            {{obj.data}}</h6>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <!-- [ Main Content ] end -->
-
         {% endblock content %}
 
         <!-- Specific Page JS goes HERE  -->
@@ -156,7 +126,7 @@
                 "lengthChange": false,
                 language: {
                     search: "Search hashtags:",
-    info: "Page _PAGE_ of _PAGES_"
+    info: "Pagina _PAGE_ de _PAGES_"
   }
 
             });

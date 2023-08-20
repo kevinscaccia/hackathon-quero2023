@@ -7,6 +7,7 @@ from typing import List,Dict
 
 from ..classes.LoggingHelper import Auditor
 from ..classes.PostgreeHelper import PostgreeHelper
+from ..models.SubmitRequestModel import SubmitRequestModel
 from ..models.SubmitModelExtractorRequest import SubmitModelExtractorRequest
 
 
@@ -77,8 +78,6 @@ async def submitter(id:str, req:Request):
         print(traceback.format_exc())
         #logger.log(modo='g', tipo='ERR', txt=f'Erro na aplicacao report {e}')
 
-
-
 @router.get("/essayQuantityByTheme", summary="Retorna quantidade de redações por tema", tags=["Cockpit"])
 async def essayQuantityByTheme(req:Request):
     try:
@@ -93,15 +92,12 @@ async def essayQuantityByTheme(req:Request):
         print(traceback.format_exc())
 
 @router.post("/submit/", summary="Submete uma redação para avaliação", tags=["Cockpit"])
-async def submitter(body_params:SubmitModelExtractorRequest, req:Request):
+async def submitter(body_params:SubmitRequestModel, req:Request):
     try:
-        return {
-                "Success":"Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-                "Success":"Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-                "Success":"Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-                "Success":"Lorem ipsum dolor sit amet, consectetur adipiscing elit"
-                }
-        
+        print(body_params)
+        #TODO MANDA PARA MODELO
+        import uuid
+        return {"id_analise":str(uuid.uuid4()), "nota_final":1000, "nota_criterios":[{"criterio":1, "nota":200}], "comentarios":['a','b','c']}
     except Exception as e:
         print(traceback.format_exc())
         #logger.log(modo='g', tipo='ERR', txt=f'Erro na aplicacao report {e}')

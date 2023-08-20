@@ -8,26 +8,6 @@ from psycopg2 import pool
 
 import os, redis
 
-#Iniciando Pool de conexões
-#pool_pg = pool.ThreadedConnectionPool(
-#    minconn=int(os.environ['PY_DB_POOL_MIN_CON']),
-#    maxconn=int(os.environ['PY_DB_POOL_MAX_CON']),
-#    **parse_dsn(os.environ['PY_DB_CONNECTION'])
-#)
-#if pool_pg.closed: raise Exception("Falha ao conectar ao banco de dados!")
-
-
-#Inicialização
-#print("[i] Conexao com o banco realizada com sucesso")
-#sessao_redis = redis.Redis(host='svc-redis', port=6379, db=0)
-#print("[i] Conexao com o cache realizada")
-#sessao_carol = Carol(domain=os.environ['PY_CAROL_DOMAIN'], app_name=os.environ['PY_CAROL_APPNAME'], auth=ApiKeyAuth(api_key=os.environ['PY_CAROL_CONNECTOR_API_TOKEN']), connector_id=os.environ['PY_CAROL_CONNECTOR_ID'], organization=os.environ['PY_CAROL_ORGANIZATION'], host="totvstechfindev.carol.ai")
-#sessao_bq = BQ(sessao_carol)
-#print("[i] Conexao com a Carol estabelecida")
-#_auditor = Auditor(con_pool=pool_pg)
-#_auditor.monitor_handler()
-#print("[i] Thread de logs instanciada!")
-
 #Customização Swagger
 app = FastAPI(
     title="redac-ai", 
@@ -57,11 +37,11 @@ async def add_sessao_state(request:Request, call_next):
     Response : FastAPI.Response
         Resposta HTTP para saída
     """
-    request.state.pg_pool = pool.SimpleConnectionPool(1, 20, user="admin",
-                                                         password="admin",
-                                                         host="127.0.0.1",
-                                                         port="5432",
-                                                         database="General") 
+    request.state.pg_pool = pool.SimpleConnectionPool(1, 20, user="postgres",
+                                                         password="a274-e535-472b-8ad",
+                                                         host="localhost",
+                                                         port="32770",
+                                                         database="postgres") 
 
 
     response = await call_next(request)

@@ -13,13 +13,8 @@ RUN pip install setuptools>=65.5.1
 RUN pip install wheel>=0.38.1
 
 RUN pip install --no-cache-dir -r requirements.txt
-COPY . ./painel-backoffice-datalake-py
+COPY . ./redacai-api
 EXPOSE 8080
-ENTRYPOINT ["uvicorn", "painel-backoffice-datalake-py.main:app", "--port", "8080", "--host", "0.0.0.0"]
-
-FROM us-central1-docker.pkg.dev/totvsapps-services/devops-foundation/sonar-scanner-cli:1.5 AS sonarqube
-COPY . .
-COPY sonar-project.properties .
-RUN sonarScanner
+ENTRYPOINT ["uvicorn", "redacai-api.main:app", "--port", "8080", "--host", "0.0.0.0"]
 
 FROM base AS final

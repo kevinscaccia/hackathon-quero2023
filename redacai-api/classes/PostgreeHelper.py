@@ -140,8 +140,33 @@ class PostgreeHelper:
                     FROM essays_themes
                 '''.format(id)
             )
+            saida = {"temas":[]}
+            for v in _aux.fetchall():
+                saida['temas'].append({"titulo":v[0], "texto_base":v[1],"id":v[2]})
+            return saida
+        except Exception as e:
+            print(e)
+            _aux.close()
+        finally:
+            _aux.close()
 
-            return _aux.fetchall()
+    def busca_tema(self,id):
+        #general
+        if not self.conector:
+            print("Impossivel inserir tema sem sessao instanciada!")
+            return False
+        
+        try:
+            _aux = self.conector.cursor()
+            _aux.execute(
+                '''
+                    SELECT *
+                    FROM essays_themes
+                    WHERE id = {}
+                '''.format(id)
+            )
+            for v in _aux.fetchall():
+                return saida['temas'].append({"titulo":v[0], "texto_base":v[1],"id":v[2]})
         except Exception as e:
             print(e)
             _aux.close()
