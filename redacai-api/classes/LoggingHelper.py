@@ -190,10 +190,6 @@ class Auditor:
     	
         if logItem.modo == "g":
             sql = f"INSERT INTO general_logs (id, transaction_id, tipo, txt, tenantId, pageload) VALUES ('{logItem.uuid}', %s, '{logItem.tipo}', '{logItem.txt}', '{logItem.tenantId}', %s);"
-        elif logItem.modo == "d":
-            sql = f"INSERT INTO interface_dotnet_messages (id, transaction_id, tipo, tenantId, txt, pageload) VALUES ('{logItem.uuid}', %s, '{logItem.tipo}', '{logItem.tenantId}', '{logItem.txt}', %s);"
-        elif logItem.modo == "c":
-            sql = f"INSERT INTO carol_messages (id, transaction_id, tipo, tenantId, latest_data_model, txt, pageload) VALUES ('{logItem.uuid}', %s, '{logItem.tipo}', '{logItem.tenantId}', '{logItem.latest_data_model}', '{logItem.txt}', %s);"
         _aux = self.conector.cursor()
         for k in range(3):
             try:
