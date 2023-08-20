@@ -2,7 +2,7 @@ from pydantic import BaseModel
 from typing import List
 
 class ThemeModelResponse(BaseModel):
-    themeList: List["ThemeModelItem"]
+    themeList: List["ThemeModelResponse.ThemeModelItem"]
     class ThemeModelItem(BaseModel):
         id:int
         titulo:str

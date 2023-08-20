@@ -1,8 +1,3 @@
-"""
-[POC DATALAKE PROTHEUS]
-Código de uso privado, reprodução proibida!
-Todos direitos reservados à TOTVS ™
-"""
 
 import json,threading,time,uuid
 from psycopg2.errors import DuplicateTable
@@ -21,59 +16,11 @@ _schemas = {
             tenantId VARCHAR(300), 
             pageload JSONB
         )
-    """,
-
-    "interface_dotnet_messages":"""
-        CREATE TABLE interface_dotnet_messages (
-            id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-            transaction_id uuid,
-            data TIMESTAMP DEFAULT NOW(),
-            tipo VARCHAR(100),
-            tenantId VARCHAR(300),
-            txt TEXT,
-            pageload JSONB
-        )
-    """,
-
-    "carol_messages":"""
-        CREATE TABLE carol_messages (
-            id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-            transaction_id uuid,
-            data TIMESTAMP DEFAULT NOW(),
-            tipo VARCHAR(100),
-            tenantId VARCHAR(300),
-            latest_data_model VARCHAR(100),
-            txt TEXT,
-            pageload JSONB
-        )
     """
 }
 
 class Auditor:
-    """
-    Classe para abstrair necessidades de auditabilidade das operações realizadas pela aplicação.
     
-    Parameters
-    ----------
-    con_pool : psycopg2.pool
-        Pool contendo conexões disponíveis com o banco
-    
-    looker : list
-        Lista para observação dos logs a serem inseridos
-            (Fila de prioridade)
-    
-    thread_lk : threading.Lock
-        Objeto para controle de acesso ao objeto compartilhado (looker)
-    
-    Notes
-    -----
-    Esta classe tem dois modos de operação
-        - Instancia fila de prioridade e monitora para inserção de logs ordenadas com controle de sessão
-            Quando a classe recebe um objeto con_pool (Pool de conexões postgres)
-        - Insere modelo pré definido LogModel na fila de prioridade para a posterior inserção do watcher
-            Quando a classe recebe um looker para inserir e um thread_lk para controlar o acesso ao objeto da fila de prioridade
-    
-    """
     def __init__(self, looker=None, con_pool=None, thread_lk=None) -> None:
         if type(looker) == None and not con_pool: raise Exception("Uso incorreto da classe de logs! é necessário uma lista para auditar ou uma pool de conexões")
 

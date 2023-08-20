@@ -1,11 +1,7 @@
 
 from fastapi import FastAPI, Request
 from fastapi.middleware.gzip import GZipMiddleware
-from .routers import carol_utils
-from .classes.LoggingHelper import Auditor
-
-from pycarol import Carol, ApiKeyAuth
-from pycarol.bigquery import BQ
+from .routers import redacai_utils 
 
 from psycopg2.extensions import parse_dsn
 from psycopg2 import pool
@@ -61,12 +57,19 @@ async def add_sessao_state(request:Request, call_next):
     Response : FastAPI.Response
         Resposta HTTP para saída
     """
+    request.state.pg_pool = pool.SimpleConnectionPool(1, 20, user="admin",
+                                                         password="admin",
+                                                         host="127.0.0.1",
+                                                         port="5432",
+                                                         database="General") 
+
+
     response = await call_next(request)
     return response
 
 
 #Instanciando rotas de controllers
-app.include_router(carol_utils.router)
+app.include_router(redacai_utils.router)
 
 
 #Rotas de heartbeat
