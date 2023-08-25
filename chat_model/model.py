@@ -52,7 +52,9 @@ import pandas as pd
 
 dataframe = pd.read_csv('../data/base_redacoes_final.csv')
 dataframe = dataframe.rename(columns={'nota_final':'nota_real'})
-instancia = dataframe.iloc[0].to_dict()
+instancia = dataframe.iloc[4].to_dict()
+
+print(instancia)
 
 output = make_request(instancia['texto_original'], instancia['tema'], instancia['titulo'])
 print(output)
