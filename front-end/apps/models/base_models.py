@@ -18,7 +18,7 @@ class RegisteredUser(BaseModel):
 
 #Model para Tema
 class Tema(BaseModel):
-    id:int
+    id:str
     titulo:str
     texto_base:str
     data:str
@@ -34,7 +34,7 @@ class AnalysisRequest(BaseModel):
 
 #Model resposta analise
 class Analysis(BaseModel):
-    id:int
+    id:str
     nota_final:int
     comentarios:List[str] = []
     nota_criterios:List["Analysis.Criteria"]

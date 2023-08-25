@@ -27,7 +27,9 @@ class bk:
         }
         # Fazendo a requisição POST
         response = req.post(f"{self.base}/submit/", json=data)
-        return response.json() if response.status_code == 200 else False
+        print(response.text)
+        print(response.json())
+        return response.json()['id_analise']
     
     def retrieve_analysis(self,id:int) -> Analysis:
         """Recupera informações da gerada no banco"""
@@ -35,6 +37,6 @@ class bk:
         return Analysis(id=1, nota_final=760, comentarios=['coment1', 'coment2'], nota_criterios=[Analysis.Criteria(criterio=1, nota=120), Analysis.Criteria(criterio=2, nota=120), Analysis.Criteria(criterio=3, nota=120), Analysis.Criteria(criterio=4, nota=120), Analysis.Criteria(criterio=5, nota=120)])
 
     def request_tema(self, id) -> Tema:
-        #TODO - IMPLEMENTAR REQUEST
-        return tema_gen(1)[0]
+        v = req.get(f"{self.base}/theme/{id}").json()
+        return Tema(id=v['id'], titulo=v['titulo'], texto_base=v['texto_base'], data=f"{(datetime.now()+timedelta(days=1)).strftime('%Y-%m-%d')}")
     

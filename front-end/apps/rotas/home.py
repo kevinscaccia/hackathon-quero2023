@@ -25,8 +25,8 @@ def index(request: Request):
     })
 
 @router.get("/submit/{id_tema}")
-def submit(id_tema:int, request:Request):
-    r = bk().request_tema(1)
+def submit(id_tema:str, request:Request):
+    r = bk().request_tema(id_tema)
     return templates.TemplateResponse("resource/submit.html", {
         "request": request, 
         "tema":r,
@@ -35,11 +35,10 @@ def submit(id_tema:int, request:Request):
     })
 
 @router.post("/analyzer/{id_tema}/{id}")
-def analyzer(req:AnalysisRequest, id:str, id_tema:str, request:Request):
-    if not id: return {"message":"id de analise requerido", "success":False}
+def analyzer(id:str, id_tema:str, request:Request):
     print(f"[i] Buscando {id}")
-    redacao = bk().request_analysis(id)
-    tema = bk().request_tema
+    redacao = bk().retrieve_analysis(id)
+    tema = bk().request_tema(id_tema)
     return templates.TemplateResponse("resource/analyzer.html", {
         "request": request,
         "tema":tema,
@@ -50,9 +49,6 @@ def analyzer(req:AnalysisRequest, id:str, id_tema:str, request:Request):
 
 @router.post("/submit/{id_tema}")
 def submite_analysis(id_tema:str, txtRedacao:Annotated[str, Form()], txtTituloRedacao:Annotated[str, Form()], request:Request):
-    print(id_tema)
-    print(txtRedacao)
-    print(txtTituloRedacao)
-    import time,uuid
-    time.sleep(2)
-    return RedirectResponse(url=router.url_path_for("analyzer", id=str(uuid.uuid4()), id_tema=id_tema))
+    _h = bk()
+    id_analise = _h.request_analysis(txtTituloRedacao, txtRedacao, id_tema)
+    return RedirectResponse(url=router.url_path_for("analyzer", id=id_analise, id_tema=id_tema))
